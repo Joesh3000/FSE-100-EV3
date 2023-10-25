@@ -1,0 +1,53 @@
+
+% Car automation
+% Touch sensor (1) Color sensor (1) Ultrasonic sensor (1) Gyro sensor (1)
+% javaclasspath('/Applications/MATLAB_R2023b.app/toolbox/ev3')
+%brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5')
+
+
+classdef ultrasonic
+    properties(Constant)
+        nextWallDistance = 0;
+    end
+  methods(Static)
+        function changeDetected = wallChange(brick)
+            initialDistance = brick.UltrasonicDist(4);
+            changeDetected = false; 
+            
+            while true
+                currentDistance = brick.UltrasonicDist(4);
+                fprintf('Current distance: %.3f cm, Initial distance: %.3f cm\n', currentDistance, initialDistance);
+
+                if (currentDistance - initialDistance) > 0.5
+                    ultrasonic.nextWallDistance = currentDistance;
+                    changeDetected = true;
+                    fprintf('New wall at %.3f cm away. Changing direction.\n', ultrasonic.nextWallDistance);
+                    break;
+                else
+                    brick.MoveMotor('AB', -60);
+                    pause(1);
+                end
+            end
+        end
+       
+        function goForward(brick, speed)
+            brick.MoveMotor('AB', -speed);
+        end
+       
+        function turnRight(brick, speed, duration)
+            %brick.MoveMotor('A', speed);
+            brick.MoveMotor('B', -speed);
+            pause(duration);
+            brick.StopAllMotors('Brake');
+        end
+
+        function turnLeft(brick, speed, duration)
+            %brick.MoveMotor('A', -speed);
+            brick.MoveMotor('B', speed);
+            pause(duration);
+            brick.StopAllMotors('Brake');
+        end
+    end
+end
+
+

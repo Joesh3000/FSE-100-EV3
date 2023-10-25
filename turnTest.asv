@@ -1,0 +1,13 @@
+%Test for turning check
+% ultrasonic.turnRight(brick, 30, 4); %impl gyro turns?
+brick.ResetMotorAngle('A');
+brick.ResetMotorAngle('B');
+brick.MoveMotorAngleRel('A', 50, 360, 'Brake'); 
+brick.WaitForMotor('A');
+% ultrasonic.goForward(brick, 60);
+pause(2);
+% brick.StopAllMotors('Brake');
+ultrasonic.turnRight(brick, 60, 1); %impl gyro turns?
+ultrasonic.goForward(brick, 60);
+pause(2);
+brick.StopAllMotors('Brake');
