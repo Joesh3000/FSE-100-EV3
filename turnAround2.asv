@@ -1,0 +1,43 @@
+% brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5')
+fprintf('Running turnAround2\n');
+    brick.MoveMotor('A', -60);
+    brick.MoveMotor('B', -60);
+    brick.ResetMotorAngle('A');
+    brick.ResetMotorAngle('B');
+    brick.MoveMotorAngleRel('A', 30, 670, 'Brake'); 
+    brick.MoveMotorAngleRel('B', 30, 670, 'Brake'); 
+    pause(5);
+    while true
+           fprintf('Spinning\n');
+           fprintf('Done spinning\n');
+           touch = brick.TouchPressed(2);
+           touch2 = brick.TouchPressed(1);
+           speed = -120;
+           brick.MoveMotor('AB', speed);
+           if touch || touch2
+               brick.StopAllMotors('Brake');
+               fprintf('Wall hit!\n');
+               brick.ResetMotorAngle('A');
+               brick.ResetMotorAngle('B'); 
+               brick.MoveMotor('A', -60);
+               brick.MoveMotor('B', -60);
+               pause(5);
+               
+               fprintf('Reversing\n');
+               pause(5);
+               brick.StopAllMotors('Brake');
+               fprintf('Turning\n');
+               brick.ResetMotorAngle('A');
+               brick.ResetMotorAngle('B'); 
+               brick.MoveMotorAngleRel('A', 30, 670, 'Brake'); 
+               brick.MoveMotorAngleRel('B', 30, 670, 'Brake'); 
+               brick.ResetMotorAngle('A');
+               brick.ResetMotorAngle('B'); 
+               pause(5);
+               brick.StopAllMotors('Brake');
+           end
+    end
+    
+
+
+             
