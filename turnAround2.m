@@ -1,5 +1,9 @@
-% brick = Brick('ioType','wifi','wfAddr','127.0.0.1','wfPort',5555,'wfSN','0016533dbaf5')
-fprintf('Running turnAround2\n');
+classdef Turnaround2
+    properties(Constant)
+end
+methods(Static)
+    function turnAroundThing = turnAround2(brick)
+    fprintf('Running turnAround2\n');
     angle = 335;
     fprintf('Spinning\n');
     brick.ResetMotorAngle('A');
@@ -38,7 +42,11 @@ fprintf('Running turnAround2\n');
                brick.StopAllMotors('Brake');
            end
     end
-    
+    end
+
+end
+end
+
 
 
              
