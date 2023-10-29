@@ -1,10 +1,33 @@
+count = 0;
 
-fx.turnLeft(brick);
-pause(1)
-fx.turnLeft(brick); % Rotate Ultra Sensor to the Right of bot
-fx.detectWallChange(brick);
+while true
+    brick.SetColorMode(3, 2);
+    color = brick.ColorCode(3);
+    fx.detectWallChange(brick)
+    % Check for wall change
+    if fx.detectWallChange(brick)
+        count = count + 1;
+    end
 
-% Needs Gyro turns eventually
-% Needs color sensing 
-% May needs touch sensing 
-% May or may not need Wall Following (Gyro may cover this)
+    % Perform actions based on color
+    if color == 4
+        fprintf('Lifting lift\n');
+        brick.StopAllMotors('Brake');
+        brick.MoveMotor('C', 250);
+        pause(5);
+        brick.StopAllMotors('Brake');
+        fprintf('Done Lifting\n');
+    end
+    
+    if color == 3
+        fprintf('Finish\n');
+        brick.StopAllMotors('Brake');
+    end
+    
+    if color == 5
+        brick.StopAllMotors('Brake');
+        fprintf('yo')
+    end
+
+    pause(1);
+end
