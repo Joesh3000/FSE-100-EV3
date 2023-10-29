@@ -1,6 +1,6 @@
 classdef fx
     methods(Static)
-          function changeDetected = detectWallChange(brick)
+          function detectWallChange(brick)
             initialDistance = brick.UltrasonicDist(4);
             changeDetected = false; 
             while true
@@ -21,11 +21,11 @@ classdef fx
           end 
         
         function goForward(brick, speed)
-            brick.MoveMotor('AB', -speed);
+            brick.MoveMotor('AB', speed);
         end
         
         function goBackward(brick, speed)
-            brick.MoveMotor('AB', speed);
+            brick.MoveMotor('AB', -speed);
         end
         
         function turnLeft(brick)
