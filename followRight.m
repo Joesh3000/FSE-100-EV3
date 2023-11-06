@@ -7,7 +7,7 @@ lifted = false;
 while true
     d1 = brick.UltrasonicDist(4);
     brick.MoveMotor('AB', -60);
-    pause(0.08);
+    pause(0.75);
     d2 = brick.UltrasonicDist(4);
     if (d2 - d1) > 5
         fprintf('wall detected\n');
