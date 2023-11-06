@@ -1,0 +1,15 @@
+% Specify waypoints, times of arrival, and sampling rate. 
+wp = [0 0 0; 2 -2 0; 4 0 0; 6 2 0; 8 0 0; 6 -2 0; 4 0 0; 2 2 0; 0 0 0];
+toa = 4*(0:size(wp,1)-1).';
+Fs = 100;
+
+% Create trajectory. 
+traj = waypointTrajectory(wp, toa, SampleRate=Fs);
+
+% Get position.
+t = 0:1/Fs:toa(end);
+pos = lookupPose(traj, t);
+
+% Plot.
+figure
+plot(pos(:,1), pos(:,2))
