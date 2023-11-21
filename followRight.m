@@ -5,8 +5,9 @@ brick.SetColorMode(3, 2);
 lifted = false;
 
 while true
-    d1 = brick.UltrasonicDist(4);
-    brick.MoveMotor('AB', -60);
+    brick.StopAllMotors;
+    d1 = brick.UltrasonicDist(4);   
+    brick.MoveMotor('AB', -45);
     pause(0.75);
     d2 = brick.UltrasonicDist(4);
     if (d2 - d1) > 5
@@ -28,6 +29,7 @@ while true
         gyroTurn180;
         lifted = true;
     end
+    
     if color == 3 && lifted
         fprintf('Finish\n');
         brick.StopAllMotors('Brake');
@@ -40,6 +42,7 @@ while true
             pause(0.5);
             brick.StopAllMotors;
             brick.MoveMotor('AB', 60);
+    
             pause(0.9);
             brick.StopAllMotors;
             gyroTurn180;
@@ -49,7 +52,7 @@ while true
             end
 
         end
-       
-       pause(0.1);
+        
+    correction;
 
 end
