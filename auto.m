@@ -3,6 +3,7 @@ fprintf('starting followRight\n');
 gyroTurn180;
 brick.SetColorMode(3, 2);
 lifted = false;
+
 ovverideGo = false; %if this is true it opens up the manual controls
 
 while ~ovverideGo %while this is not true it does the normal followRight
@@ -55,7 +56,7 @@ while ~ovverideGo %while this is not true it does the normal followRight
        end
 end
 
-
+ovveride = input('enter to ovveride');
 
 if strcmp(override, 'yes') %if the user wants to ovveride than it sets ovveride go to true and opens the manual control.
     ovverideGo = true;
