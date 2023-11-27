@@ -3,10 +3,14 @@ fprintf('starting followRight\n');
 gyroTurn180;
 brick.SetColorMode(3, 2);
 lifted = false;
-
-ovverideGo = false; %if this is true it opens up the manual controls
-
-while ~ovverideGo %while this is not true it does the normal followRight
+global key
+InitKeyboard();
+while true
+    switch key 
+        case 'm'
+            disp('open manual control')
+            manual();
+    end
     brick.StopAllMotors;
     d1 = brick.UltrasonicDist(4);   
     brick.MoveMotor('AB', -45);
@@ -53,19 +57,6 @@ while ~ovverideGo %while this is not true it does the normal followRight
                 gyroTurn;
             end
 
-       end
+        end
 end
-
-ovveride = input('enter to ovveride');
-
-if strcmp(override, 'yes') %if the user wants to ovveride than it sets ovveride go to true and opens the manual control.
-    ovverideGo = true;
-end
-
-while ovverideGo %here is where it opens up manual 
-    manual();
-end
-
-%I don't know how to order the code to get it working where it while prompt
-%the user to enter yes, but will keep doing the normal "followRight" code
-%until yes is prompted then it will stop and open up manual controls. 
+CloseKeyboard();
